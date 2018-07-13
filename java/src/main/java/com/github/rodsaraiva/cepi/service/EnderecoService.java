@@ -16,7 +16,7 @@ public class EnderecoService {
 
 	@Autowired
 	private RestTemplate restTemplate;
-	
+
 	@Autowired
 	private EnderecoRepository repository;
 
@@ -25,22 +25,28 @@ public class EnderecoService {
 		if (cep == null || !cep.matches("\\d{8}")) {
 			throw new RuntimeException("Cep não pode ser nulo");
 		}
-		
+
 		List<Endereco> enderecos = repository.findByCep(cep);
-		
+
 		if (!enderecos.isEmpty()) {
-			
 			Endereco endereco = enderecos.get(0);
-			return new ApiResponse(endereco); 
+			return new ApiResponse(endereco);
 		}
-		
+
+		Endereco enderecoFromRemote = getFromRemoteApi(cep);
+
+		repository.save(enderecoFromRemote);
+
+		return new ApiResponse(enderecoFromRemote);
+
+	}
+
+	private Endereco getFromRemoteApi(String cep) {
 		String viacepApiUrl = "https://viacep.com.br/ws/" + cep + "/json/";
 
 		ViacepResponse viacepResponse = restTemplate.getForObject(viacepApiUrl, ViacepResponse.class);
 
-		repository.save(new Endereco(viacepResponse));
-		
-		return new ApiResponse(viacepResponse);
+		return new Endereco(viacepResponse);
 	}
 
 }
