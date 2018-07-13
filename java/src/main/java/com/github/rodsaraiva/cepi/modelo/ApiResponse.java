@@ -2,7 +2,7 @@ package com.github.rodsaraiva.cepi.modelo;
 
 import com.github.rodsaraiva.cepi.viacep.ViacepInfo;
 
-public class Endereco {
+public class ApiResponse {
 
 	private String cep;
 	private String logradouro;
@@ -10,7 +10,7 @@ public class Endereco {
 	private String cidade;
 	private String uf;
 
-	public Endereco(String cep, String logradouro, String bairro, String cidade, String uf) {
+	public ApiResponse(String cep, String logradouro, String bairro, String cidade, String uf) {
 		this.cep = cep;
 		this.logradouro = logradouro;
 		this.bairro = bairro;
@@ -18,7 +18,7 @@ public class Endereco {
 		this.uf = uf;
 	}
 
-	public Endereco(ViacepInfo viacepInfo) {
+	public ApiResponse(ViacepInfo viacepInfo) {
 		this.cep = viacepInfo.getCep();
 		this.logradouro = viacepInfo.getLogradouro();
 		this.bairro = viacepInfo.getBairro();
