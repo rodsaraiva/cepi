@@ -1,6 +1,6 @@
 package com.github.rodsaraiva.cepi.modelo;
 
-import com.github.rodsaraiva.cepi.viacep.ViacepInfo;
+import com.github.rodsaraiva.cepi.viacep.ViacepResponse;
 
 public class ApiResponse {
 
@@ -18,14 +18,22 @@ public class ApiResponse {
 		this.uf = uf;
 	}
 
-	public ApiResponse(ViacepInfo viacepInfo) {
-		this.cep = viacepInfo.getCep();
-		this.logradouro = viacepInfo.getLogradouro();
-		this.bairro = viacepInfo.getBairro();
-		this.cidade = viacepInfo.getLocalidade();
-		this.uf = viacepInfo.getUf();
+	public ApiResponse(ViacepResponse viacepResponse) {
+		this.cep = viacepResponse.getCep().replace("-", "");
+		this.logradouro = viacepResponse.getLogradouro();
+		this.bairro = viacepResponse.getBairro();
+		this.cidade = viacepResponse.getLocalidade();
+		this.uf = viacepResponse.getUf();
 	}
 	
+	public ApiResponse(Endereco endereco) {
+		this.cep = endereco.getCep().replace("-", "");
+		this.logradouro = endereco.getLogradouro();
+		this.bairro = endereco.getBairro();
+		this.cidade = endereco.getLocalidade();
+		this.uf = endereco.getUf();
+	}
+
 	public String getCep() {
 		return cep;
 	}

@@ -1,6 +1,6 @@
 package com.github.rodsaraiva.cepi.viacep;
 
-public class ViacepInfo {
+public class ViacepResponse {
 
 	private String cep;
 	private String logradouro;
