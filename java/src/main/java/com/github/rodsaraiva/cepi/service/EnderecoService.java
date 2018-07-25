@@ -13,7 +13,7 @@ import com.github.rodsaraiva.cepi.viacep.ViacepResponse;
 
 @Component
 public class EnderecoService {
-
+	
 	@Autowired
 	private RestTemplate restTemplate;
 
@@ -22,8 +22,8 @@ public class EnderecoService {
 
 	public ApiResponse getEndereco(String cep) {
 
-		if (cep == null || !cep.matches("\\d{8}")) {
-			throw new RuntimeException("Cep não pode ser nulo");
+		if(cepInvalido(cep)) {
+			throw new IllegalArgumentException("Cep inválido");
 		}
 
 		List<Endereco> enderecos = repository.findByCep(cep);
@@ -39,6 +39,13 @@ public class EnderecoService {
 
 		return new ApiResponse(enderecoFromRemote);
 
+	}
+
+	private boolean cepInvalido(String cep) {
+		if (cep == null || !cep.matches("\\d{8}")) {
+			return true;
+		}
+		return false;
 	}
 
 	private Endereco getFromRemoteApi(String cep) {

@@ -12,6 +12,18 @@ public class ViacepResponse {
 	private String ibge;
 	private String gia;
 	
+	/**
+	 * @deprecated para fins de teste
+	 */
+	ViacepResponse() {}
+
+	/**
+	 * @deprecated para fins de teste
+	 */
+	public ViacepResponse(String cep) {
+		this.cep = cep;		
+	}
+	
 	public String getCep() {
 		return cep;
 	}

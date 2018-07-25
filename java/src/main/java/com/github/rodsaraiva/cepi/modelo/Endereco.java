@@ -26,6 +26,13 @@ public class Endereco {
 	 */
 	public Endereco() {
 	}
+
+	/**
+	 * @deprecated para fins de teste
+	 */
+	public Endereco(String cep) {
+		this.cep = cep;
+	}
 	
 	public Endereco(ViacepResponse viacepResponse) {
 		this.cep = viacepResponse.getCep().replace("-", "");
